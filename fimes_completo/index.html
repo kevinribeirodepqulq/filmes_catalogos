@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimeFlix - Catálogo Completo de Animes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset e estilos gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            color: #f5f5f5;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #f5f5f5;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header e Navegação */
+        header {
+            background: rgba(10, 10, 10, 0.95);
+            padding: 15px 0;
+            box-shadow: 0 2px 20px rgba(255, 20, 100, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            animation: slideDown 0.8s ease;
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff1461, #ff8a00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(255, 20, 100, 0.5);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: flex-end;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            font-weight: 500;
+        }
+        
+        nav ul li a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 20, 100, 0.4), transparent);
+            transition: left 0.7s;
+        }
+        
+        nav ul li a:hover::before {
+            left: 100%;
+        }
+        
+        nav ul li a:hover {
+            background: rgba(255, 20, 100, 0.2);
+            box-shadow: 0 0 15px rgba(255, 20, 100, 0.4);
+        }
+        
+        nav ul li a.active {
+            background: linear-gradient(45deg, #ff1461, #ff8a00);
+            box-shadow: 0 0 15px rgba(255, 20, 100, 0.6);
+        }
+        
+        /* Página Inicial - Catálogo */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
+                        url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
+            height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1.2s ease;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.8) 100%);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .hero-content {
+            animation: zoomIn 1.5s ease;
+            z-index: 2;
+            position: relative;
+        }
+        
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .hero h1 {
+            font-size: 60px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(255, 20, 100, 0.7);
+            background: linear-gradient(45deg, #ff1461, #ff8a00, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(255, 20, 100, 0.5); }
+            to { text-shadow: 0 0 20px rgba(255, 20, 100, 0.8), 0 0 30px rgba(255, 20, 100, 0.6); }
+        }
+        
+        .hero p {
+            font-size: 22px;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff1461, #ff8a00);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.4s;
+            box-shadow: 0 5px 15px rgba(255, 20, 100, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 20, 100, 0.6);
+        }
+        
+        .search-bar {
+            display: flex;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: slideUp 1s ease;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .search-bar input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #f5f5f5;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .search-bar input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #ff1461;
+        }
+        
+        .search-bar button {
+            background: linear-gradient(45deg, #ff1461, #ff8a00);
+            color: white;
+            border: none;
+            padding: 0 30px;
+            border-radius: 0 30px 30px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .search-bar button:hover {
+            background: linear-gradient(45deg, #ff8a00, #ff1461);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #ff1461, #ff8a00);
+            border-radius: 2px;
+        }
+        
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .movie-card {
+            background: rgba(30, 30, 46, 0.8);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            animation: cardAppear 0.6s ease forwards;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        @keyframes cardAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .movie-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 20, 100, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        
+        .movie-card:hover::before {
+            opacity: 1;
+        }
+        
+        .movie-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(255, 20, 100, 0.3);
+        }
+        
+        .movie-poster {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            transition: transform 0.7s;
+        }
+        
+        .movie-card:hover .movie-poster {
+            transform: scale(1.1);
+        }
+        
+        .movie-info {
+            padding: 20px;
+            position: relative;
+        }
+        
+        .movie-title {
+            font-size: 18px;
+            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-weight: 600;
+        }
+        
+        .movie-year {
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .movie-rating {
+            position: absolute;
+            top: -15px;
+            right: 15px;
+            background: linear-gradient(45deg, #ff1461, #ff8a00);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .movie-genres {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        
+        .genre-tag {
+            background: rgba(255, 20, 100, 0.2);
+            color: #ff8a00;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+        }
+        
+        .watch-trailer {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: rgba(255, 20, 100, 0.3);
+            color: white;
+            text-align: center;
+            border: none;
+            border-radius: 8px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .watch-trailer:hover {
+            background: rgba(255, 20, 100, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        /* Modal de Trailer */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 800px;
+            background: rgba(30, 30, 46, 0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-header {
+            padding: 20px;
+            background: rgba(255, 20, 100, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff1461, #ff8a00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: #ff1461;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Páginas de Formulário (Cadastro, Login) */
+        .form-container {
+            max-width: 450px;
+            margin: 60px auto;
+            background: rgba(30, 30, 46, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            animation: formAppear 0.8s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        @keyframes formAppear {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #ff1461, #ff8a00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 32px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #f5f5f5;
+            transition: all 0.3s;
+            font-size: 16px;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #ff1461;
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #ff1461, #ff8a00);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(255, 20, 100, 0.4);
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 20, 100, 0.6);
+        }
+        
+        .form-footer {
+            text-align: center;
+            margin-top: 25px;
+        }
+        
+        .form-footer a {
+            color: #ff8a00;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .form-footer a:hover {
+            color: #ff1461;
+        }
+        
+        /* Página de Avaliações */
+        .review-container {
+            max-width: 900px;
+            margin: 40px auto;
+        }
+        
+        .review-card {
+            background: rgba(30, 30, 46, 0.8);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: slideInRight 0.6s ease forwards;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .review-card:hover {
+            transform: translateX(5px);
+        }
+        
+        @keyframes slideInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .review-card:nth-child(even) {
+            transform: translateX(30px);
+            animation: slideInLeft 0.6s ease forwards;
+        }
+        
+        @keyframes slideInLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+        
+        .review-movie {
+            font-weight: bold;
+            font-size: 18px;
+            background: linear-gradient(45deg, #ff1461, #ff8a00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .review-user {
+            color: #aaa;
+            font-style: italic;
+        }
+        
+        .review-rating {
+            color: gold;
+            margin-bottom: 15px;
+            font-size: 20px;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+        }
+        
+        .review-text {
+            line-height: 1.7;
+            font-size: 16px;
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(10, 10, 10, 0.95);
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 80px;
+            animation: fadeIn 1s ease;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            margin: 0 15px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .footer-links a:hover {
+            color: #ff8a00;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+            gap: 15px;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: linear-gradient(45deg, #ff1461, #ff8a00);
+            transform: translateY(-5px);
+        }
+        
+        /* Página oculta */
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+            animation: pageFadeIn 0.7s ease;
+        }
+        
+        @keyframes pageFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Loading */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+        }
+        
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255, 20, 100, 0.3);
+            border-radius: 50%;
+            border-top-color: #ff1461;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Filtros */
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 20px;
+            color: #f5f5f5;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: linear-gradient(45deg, #ff1461, #ff8a00);
+            box-shadow: 0 5px 15px rgba(255, 20, 100, 0.4);
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 40px;
+            }
+            
+            .movie-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 8px 0;
+            }
+            
+            .hero {
+                height: 500px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .modal-content {
+                width: 95%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .movie-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
+            
+            .form-container {
+                padding: 25px;
+            }
+        }
+        
+        /* Efeitos de partículas */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 20, 100, 0.7);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* Mensagens de erro/sucesso */
+        .message {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .success {
+            background: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+            border: 1px solid rgba(46, 204, 113, 0.3);
+        }
+        
+        .error {
+            background: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+            border: 1px solid rgba(231, 76, 60, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Efeito de partículas -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Modal de Trailer -->
+    <div class="modal" id="trailer-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-anime-title">Trailer</h3>
+                <button class="close-modal" id="close-modal">&times;</button>
+            </div>
+            <div class="video-container" id="video-container">
+                <!-- O trailer será carregado aqui -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Header com navegação -->
+    <header>
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="logo">AnimeFlix</div>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="nav-link active" data-page="home">Início</a></li>
+                        <li><a href="#" class="nav-link" data-page="register">Cadastro</a></li>
+                        <li><a href="#" class="nav-link" data-page="login">Login</a></li>
+                        <li><a href="#" class="nav-link" data-page="reviews">Avaliações</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Páginas do sistema -->
+    <main>
+        <!-- Página Inicial (Catálogo) -->
+        <section id="home" class="page active">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>Mundo dos Animes</h1>
+                    <p>Descubra os melhores animes e mergulhe em histórias incríveis</p>
+                    <a href="#" class="cta-button">Explorar Animes</a>
+                </div>
+            </div>
+            
+            <div class="container">
+                <div class="search-bar">
+                    <input type="text" id="search-input" placeholder="Buscar animes...">
+                    <button id="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="filters">
+                    <button class="filter-btn active" data-filter="all">Todos</button>
+                    <button class="filter-btn" data-filter="ação">Ação</button>
+                    <button class="filter-btn" data-filter="aventura">Aventura</button>
+                    <button class="filter-btn" data-filter="fantasia">Fantasia</button>
+                    <button class="filter-btn" data-filter="drama">Drama</button>
+                    <button class="filter-btn" data-filter="comédia">Comédia</button>
+                </div>
+                
+                <h2 class="section-title">Animes Populares</h2>
+                
+                <div class="movie-grid" id="movie-grid">
+                    <!-- Os animes serão carregados aqui via JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Página de Cadastro -->
+        <section id="register" class="page">
+            <div class="container">
+                <div class="form-container">
+                    <h2>Criar Conta</h2>
+                    <div id="register-message"></div>
+                    <form id="register-form">
+                        <div class="form-group">
+                            <label for="register-name">Nome Completo</label>
+                            <input type="text" id="register-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-email">E-mail</label>
+                            <input type="email" id="register-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password">Senha</label>
+                            <input type="password" id="register-password" required minlength="6">
+                        </div>
+                        <div class="form-group">
+                            <label for="register-confirm">Confirmar Senha</label>
+                            <input type="password" id="register-confirm" required>
+                        </div>
+                        <button type="submit" class="btn">Cadastrar</button>
+                    </form>
+                    <div class="form-footer">
+                        <p>Já tem uma conta? <a href="#" class="page-link" data-page="login">Faça login</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Página de Login -->
+        <section id="login" class="page">
+            <div class="container">
+                <div class="form-container">
+                    <h2>Login</h2>
+                    <div id="login-message"></div>
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="login-email">E-mail</label>
+                            <input type="email" id="login-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Senha</label>
+                            <input type="password" id="login-password" required>
+                        </div>
+                        <button type="submit" class="btn">Entrar</button>
+                    </form>
+                    <div class="form-footer">
+                        <p>Não tem uma conta? <a href="#" class="page-link" data-page="register">Cadastre-se</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Página de Avaliações -->
+        <section id="reviews" class="page">
+            <div class="container">
+                <h2 class="section-title">Avaliações da Comunidade</h2>
+                
+                <div class="review-container" id="reviews-container">
+                    <!-- As avaliações serão carregadas aqui via JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-discord"></i></a>
+            </div>
+            <div class="footer-links">
+                <a href="#">Sobre</a>
+                <a href="#">Contato</a>
+                <a href="#">Termos de Uso</a>
+                <a href="#">Política de Privacidade</a>
+                <a href="#">FAQ</a>
+            </div>
+            <div class="copyright">
+                &copy; 2023 AnimeFlix. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dados de exemplo para animes com trailers
+        const animes = [
+            {
+                id: 1,
+                title: "Attack on Titan",
+                year: 2013,
+                rating: 9.0,
+                genres: ["Ação", "Fantasia", "Drama"],
+                poster: "https://m.media-amazon.com/images/M/MV5BMTY5ODk1NzUyMl5BMl5BanBnXkFtZTgwMjUyNzEyMTE@._V1_FMjpg_UX1000_.jpg",
+                trailer: "https://www.youtube.com/embed/MGRm4IzK1SQ"
+            },
+            {
+                id: 2,
+                title: "Demon Slayer: Kimetsu no Yaiba",
+                year: 2019,
+                rating: 8.7,
+                genres: ["Ação", "Fantasia", "Aventura"],
+                poster: "https://m.media-amazon.com/images/M/MV5BZjZjNzI5MDctY2Y4YS00NmM4LTljMmItZTFkOTExNGI3ODRhXkEyXkFqcGdeQXVyNjc3MjQzNTI@._V1_FMjpg_UX1000_.jpg",
+                trailer: "https://www.youtube.com/embed/VQGCKyvzIM4"
+            },
+            {
+                id: 3,
+                title: "My Hero Academia",
+                year: 2016,
+                rating: 8.4,
+                genres: ["Ação", "Aventura", "Fantasia"],
+                poster: "https://m.media-amazon.com/images/M/MV5BOGZlY2NhYmQtZDI3My00MTM1LTlkMjItOGM0M2ExYjY0N2U1XkEyXkFqcGdeQXVyMjc2Nzg5OTQ@._V1_FMjpg_UX1000_.jpg",
+                trailer: "https://www.youtube.com/embed/wIb3nnOeves"
+            },
+            {
+                id: 4,
+                title: "Death Note",
+                year: 2006,
+                rating: 9.0,
+                genres: ["Mistério", "Suspense", "Sobrenatural"],
+                poster: "https://m.media-amazon.com/images/M/MV5BNjRiNmNjMmMtN2U2Yi00ODgxLTk3OTMtMmI1MTI1NjYyZTEzXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_FMjpg_UX1000_.jpg",
+                trailer: "https://www.youtube.com/embed/NlJZ-YgAt-c"
+            },
+            {
+                id: 5,
+                title: "Fullmetal Alchemist: Brotherhood",
+                year: 2009,
+                rating: 9.1,
+                genres: ["Ação", "Aventura", "Drama"],
+                poster: "https://m.media-amazon.com/images/M/MV5BZmEzN2YzOTItMDI5MS00MGU4LWI1NWQtOTg5ZThhNGQwYTEzXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_FMjpg_UX1000_.jpg",
+                trailer: "https://www.youtube.com/embed/-GoNo0DGroU"
+            },
+            {
+                id: 6,
+                title: "One Punch Man",
+                year: 2015,
+                rating: 8.7,
+                genres: ["Ação", "Comédia", "Super-herói"],
+                poster: "https://m.media-amazon.com/images/M/MV5BMTJlMzJmY2YtM2UyOS00ODBlLTg5MjYtMzIwY2M2N2YxNmU2XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_FMjpg_UX1000_.jpg",
+                trailer: "https://www.youtube.com/embed/Poo5lqoWSGw"
+            },
+            {
+                id: 7,
+                title: "Naruto Shippuden",
+                year: 2007,
+                rating: 8.7,
+                genres: ["Ação", "Aventura", "Fantasia"],
+                poster: "https://m.media-amazon.com/images/M/MV5BZGFiMWFhNDAtMzUyZS00NmQ2LTljNDYtMmZjNTc5MDUxMzViXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_FMjpg_UX1000_.jpg",
+                trailer: "https://www.youtube.com/embed/-G9BqkgZXRA"
+            },
+            {
+                id: 8,
+                title: "Tokyo Ghoul",
+                year: 2014,
+                rating: 7.9,
+                genres: ["Ação", "Horror", "Drama"],
+                poster: "https://m.media-amazon.com/images/M/MV5BODJjMjFhN2ItNTA2Mi00ZDE4LWE5M2QtNDA4M2EyODA2OTBhXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_FMjpg_UX1000_.jpg",
+                trailer: "https://www.youtube.com/embed/vGuQeQsoRgU"
+            },
+            {
+                id: 9,
+                title: "Your Lie in April",
+                year: 2014,
+                rating: 8.7,
+                genres: ["Drama", "Música", "Romance"],
+                poster: "https://m.media-amazon.com/images/M/MV5BYThlNWY5ZDgtYTIxNC00ZjdiLWJmNGUtMDFjMDlmZTAzOWFiXkEyXkFqcGdeQXVyNTM4NzAzNjc@._V1_FMjpg_UX1000_.jpg",
+                trailer: "https://www.youtube.com/embed/3aL0gDZt6bE"
+            },
+            {
+                id: 10,
+                title: "One Piece",
+                year: 1999,
+                rating: 8.7,
+                genres: ["Ação", "Aventura", "Comédia"],
+                poster: "https://m.media-amazon.com/images/M/MV5BODcwNWE3OTMtMDc3MS00NDFjLWE1OTAtNDU3NjgxODMxY2UyXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_FMjpg_UX1000_.jpg",
+                trailer: "https://www.youtube.com/embed/S8_YwFLCh4U"
+            },
+            {
+                id: 11,
+                title: "Hunter x Hunter",
+                year: 2011,
+                rating: 9.0,
+                genres: ["Ação", "Aventura", "Fantasia"],
+                poster: "https://m.media-amazon.com/images/M/MV5BZjNmZDhkN2QtNDYyZC00YzJmLTg0ODUtN2FjNjhhMzE3ZmUxXkEyXkFqcGdeQXVyNjc2NjA5MTU@._V1_FMjpg_UX1000_.jpg",
+                trailer: "https://www.youtube.com/embed/d6kBeJjTGnY"
+            },
+            {
+                id: 12,
+                title: "Sword Art Online",
+                year: 2012,
+                rating: 7.5,
+                genres: ["Ação", "Aventura", "Romance"],
+                poster: "https://m.media-amazon.com/images/M/MV5BZTNlMzhkY2YtNjg1MC00MmY5LTliMWYtN2RiNDVjMDA0MWVhXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_FMjpg_UX1000_.jpg",
+                trailer: "https://www.youtube.com/embed/6ohYYtxfDCg"
+            },
+            {
+                id: 13,
+                title: "Jujutsu Kaisen",
+                year: 2020,
+                rating: 8.6,
+                genres: ["Ação", "Fantasia", "Sobrenatural"],
+                poster: "https://m.media-amazon.com/images/M/MV5BNGY4MTg3NzgtMmFkZi00NTg5LWExMmEtMWI3YzI1ODdmMWQ1XkEyXkFqcGdeQXVyMjQwMDg0Ng@@._V1_FMjpg_UX1000_.jpg",
+                trailer: "https://www.youtube.com/embed/pkKu9hLT-t8"
+            },
+            {
+                id: 14,
+                title: "Neon Genesis Evangelion",
+                year: 1995,
+                rating: 8.5,
+                genres: ["Ação", "Drama", "Mecha"],
+                poster: "https://m.media-amazon.com/images/M/MV5BYjY1Y2ZmYtYTk0Ny00YWQxLWE2MWYtYzMyN2VlM2VkMTk2XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_FMjpg_UX1000_.jpg",
+                trailer: "https://www.youtube.com/embed/13nSISwxrY4"
+            },
+            {
+                id: 15,
+                title: "Cowboy Bebop",
+                year: 1998,
+                rating: 8.9,
+                genres: ["Ação", "Aventura", "Ficção Científica"],
+                poster: "https://m.media-amazon.com/images/M/MV5BOTFhODQ2ZDItZGIwOC00MzAwLWJmMWYtNTYwY2FkOTYwNDg4XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_FMjpg_UX1000_.jpg",
+                trailer: "https://www.youtube.com/embed/EL-D9LrFJd4"
+            },
+            {
+                id: 16,
+                title: "Steins;Gate",
+                year: 2011,
+                rating: 9.0,
+                genres: ["Drama", "Ficção Científica", "Suspense"],
+                poster: "https://m.media-amazon.com/images/M/MV5BMjUxMzE4ZDctODNjMS00MzIwLThjNDktODkwYjc5YWU0Yjc0XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_FMjpg_UX1000_.jpg",
+                trailer: "https://www.youtube.com/embed/uMYhjVwp0Fk"
+            }
+        ];
+
+        // Dados de exemplo para avaliações
+        const reviews = [
+            {
+                id: 1,
+                anime: "Attack on Titan",
+                user: "João Silva",
+                rating: 5,
+                text: "Uma obra-prima absoluta! A animação é espetacular, a trilha sonora é emocionante e a história é profundamente envolvente. Cada temporada supera a anterior em qualidade e impacto emocional."
+            },
+            {
+                id: 2,
+                anime: "Demon Slayer: Kimetsu no Yaiba",
+                user: "Maria Santos",
+                rating: 5,
+                text: "A animação do Estúdio Ufotable é simplesmente deslumbrante. As cenas de luta são coreografadas com perfeição e a história emocional dos personagens é comovente. Um marco na indústria de animes."
+            },
+            {
+                id: 3,
+                anime: "Fullmetal Alchemist: Brotherhood",
+                user: "Carlos Oliveira",
+                rating: 5,
+                text: "Perfeição em forma de anime. Desenvolvimento de personagens excepcional, world-building impecável e uma história que equilibra ação, drama e comédia de maneira magistral. O epítome do que um shonen pode ser."
+            },
+            {
+                id: 4,
+                anime: "Your Lie in April",
+                user: "Ana Costa",
+                rating: 5,
+                text: "Uma jornada emocional inesquecível. A forma como a música é integrada na narrativa é brilhante. Prepare os lenços, porque esse anime vai tocar o seu coração de maneiras que você nem imaginava ser possível."
+            },
+            {
+                id: 5,
+                anime: "Hunter x Hunter",
+                user: "Pedro Almeida",
+                rating: 5,
+                text: "A construção de mundo mais bem elaborada que já vi em um anime. O sistema de Nen é genial e os arcos da história são variados e sempre interessantes. Yoshihiro Togashi é um gênio da narrativa."
+            }
+        ];
+
+        // Elementos DOM
+        const pages = document.querySelectorAll('.page');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pageLinks = document.querySelectorAll('.page-link');
+        const movieGrid = document.getElementById('movie-grid');
+        const reviewsContainer = document.getElementById('reviews-container');
+        const searchInput = document.getElementById('search-input');
+        const searchBtn = document.getElementById('search-btn');
+        const registerForm = document.getElementById('register-form');
+        const loginForm = document.getElementById('login-form');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const trailerModal = document.getElementById('trailer-modal');
+        const closeModal = document.getElementById('close-modal');
+        const videoContainer = document.getElementById('video-container');
+        const modalAnimeTitle = document.getElementById('modal-anime-title');
+        const registerMessage = document.getElementById('register-message');
+        const loginMessage = document.getElementById('login-message');
+
+        // Sistema de usuários (simulado)
+        let users = JSON.parse(localStorage.getItem('animeflix_users')) || [];
+        let currentUser = JSON.parse(localStorage.getItem('current_user')) || null;
+
+        // Função para mostrar uma página específica
+        function showPage(pageId) {
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-page') === pageId) {
+                    link.classList.add('active');
+                }
+            });
+            
+            document.getElementById(pageId).classList.add('active');
+            
+            // Recarregar conteúdo específico da página
+            if (pageId === 'home') {
+                loadAnimes(animes);
+            } else if (pageId === 'reviews') {
+                loadReviews();
+            }
+        }
+
+        // Função para carregar animes no catálogo com animação
+        function loadAnimes(animesToLoad) {
+            movieGrid.innerHTML = '';
+            
+            if (animesToLoad.length === 0) {
+                movieGrid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+                        <h3 style="color: #aaa; margin-bottom: 20px;">Nenhum anime encontrado</h3>
+                        <p>Tente alterar os filtros ou termos de busca</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            animesToLoad.forEach((anime, index) => {
+                const animeCard = document.createElement('div');
+                animeCard.className = 'movie-card';
+                animeCard.style.animationDelay = `${index * 0.1}s`;
+                
+                const genresHTML = anime.genres.map(genre => 
+                    `<span class="genre-tag">${genre}</span>`
+                ).join('');
+                
+                animeCard.innerHTML = `
+                    <img src="${anime.poster}" alt="${anime.title}" class="movie-poster" onerror="this.src='https://via.placeholder.com/300x450/333333/FFFFFF?text=Poster+Não+Disponível'">
+                    <div class="movie-info">
+                        <h3 class="movie-title">${anime.title}</h3>
+                        <p class="movie-year">${anime.year}</p>
+                        <div class="movie-rating">${anime.rating}</div>
+                        <div class="movie-genres">${genresHTML}</div>
+                        <button class="watch-trailer" data-id="${anime.id}">
+                            <i class="fas fa-play"></i> Assistir Trailer
+                        </button>
+                    </div>
+                `;
+                movieGrid.appendChild(animeCard);
+            });
+            
+            // Adicionar event listeners para os botões de trailer
+            document.querySelectorAll('.watch-trailer').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const animeId = parseInt(button.getAttribute('data-id'));
+                    const anime = animes.find(a => a.id === animeId);
+                    if (anime) {
+                        showTrailer(anime);
+                    }
+                });
+            });
+        }
+
+        // Função para mostrar trailer
+        function showTrailer(anime) {
+            modalAnimeTitle.textContent = `${anime.title} - Trailer`;
+            
+            // Extrair o ID do vídeo do YouTube
+            const videoId = extractYouTubeId(anime.trailer);
+            
+            videoContainer.innerHTML = `
+                <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                </iframe>
+            `;
+            trailerModal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Função para extrair ID do YouTube
+        function extractYouTubeId(url) {
+            const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+            const match = url.match(regex);
+            return match ? match[1] : null;
+        }
+
+        // Função para fechar modal
+        function closeTrailerModal() {
+            trailerModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            videoContainer.innerHTML = '';
+        }
+
+        // Função para carregar avaliações com animação
+        function loadReviews() {
+            reviewsContainer.innerHTML = '';
+            
+            reviews.forEach((review, index) => {
+                const reviewCard = document.createElement('div');
+                reviewCard.className = 'review-card';
+                reviewCard.style.animationDelay = `${index * 0.2}s`;
+                
+                let stars = '';
+                for (let i = 0; i < 5; i++) {
+                    stars += i < review.rating ? '★' : '☆';
+                }
+                
+                reviewCard.innerHTML = `
+                    <div class="review-header">
+                        <div class="review-movie">${review.anime}</div>
+                        <div class="review-user">${review.user}</div>
+                    </div>
+                    <div class="review-rating">${stars}</div>
+                    <div class="review-text">${review.text}</div>
+                `;
+                reviewsContainer.appendChild(reviewCard);
+            });
+        }
+
+        // Função para buscar animes
+        function searchAnimes() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                loadAnimes(animes);
+                return;
+            }
+            
+            const filteredAnimes = animes.filter(anime => 
+                anime.title.toLowerCase().includes(searchTerm) ||
+                anime.genres.some(genre => genre.toLowerCase().includes(searchTerm))
+            );
+            
+            loadAnimes(filteredAnimes);
+        }
+
+        // Função para filtrar animes por gênero
+        function filterAnimes(genre) {
+            if (genre === 'all') {
+                loadAnimes(animes);
+                return;
+            }
+            
+            const filteredAnimes = animes.filter(anime => 
+                anime.genres.some(g => g.toLowerCase() === genre)
+            );
+            
+            loadAnimes(filteredAnimes);
+        }
+
+        // Função para mostrar mensagem
+        function showMessage(element, message, type) {
+            element.innerHTML = `<div class="message ${type}">${message}</div>`;
+            setTimeout(() => {
+                element.innerHTML = '';
+            }, 5000);
+        }
+
+        // Criar efeito de partículas
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Posição aleatória
+                const left = Math.random() * 100;
+                const delay = Math.random() * 15;
+                const duration = 15 + Math.random() * 10;
+                
+                particle.style.left = `${left}%`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            // Criar partículas
+            createParticles();
+            
+            // Carregar animes e avaliações iniciais
+            loadAnimes(animes);
+            loadReviews();
+            
+            // Navegação entre páginas
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const pageId = link.getAttribute('data-page');
+                    showPage(pageId);
+                });
+            });
+            
+            pageLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const pageId = link.getAttribute('data-page');
+                    showPage(pageId);
+                });
+            });
+            
+            // Busca de animes
+            searchBtn.addEventListener('click', searchAnimes);
+            searchInput.addEventListener('keyup', (e) => {
+                if (e.key === 'Enter') {
+                    searchAnimes();
+                }
+            });
+            
+            // Filtros
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const filter = btn.getAttribute('data-filter');
+                    filterAnimes(filter);
+                });
+            });
+            
+            // Modal de trailer
+            closeModal.addEventListener('click', closeTrailerModal);
+            trailerModal.addEventListener('click', (e) => {
+                if (e.target === trailerModal) {
+                    closeTrailerModal();
+                }
+            });
+            
+            // Formulário de cadastro
+            registerForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('register-name').value.trim();
+                const email = document.getElementById('register-email').value.trim();
+                const password = document.getElementById('register-password').value;
+                const confirmPassword = document.getElementById('register-confirm').value;
+                
+                // Validações
+                if (name.length < 3) {
+                    showMessage(registerMessage, 'Nome deve ter pelo menos 3 caracteres', 'error');
+                    return;
+                }
+                
+                if (password.length < 6) {
+                    showMessage(registerMessage, 'Senha deve ter pelo menos 6 caracteres', 'error');
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    showMessage(registerMessage, 'As senhas não coincidem!', 'error');
+                    return;
+                }
+                
+                // Verificar se usuário já existe
+                if (users.find(user => user.email === email)) {
+                    showMessage(registerMessage, 'Este e-mail já está cadastrado!', 'error');
+                    return;
+                }
+                
+                // Cadastrar usuário
+                const newUser = {
+                    id: Date.now(),
+                    name,
+                    email,
+                    password,
+                    createdAt: new Date().toISOString()
+                };
+                
+                users.push(newUser);
+                localStorage.setItem('animeflix_users', JSON.stringify(users));
+                
+                showMessage(registerMessage, 'Cadastro realizado com sucesso!', 'success');
+                
+                // Limpar formulário
+                registerForm.reset();
+                
+                // Redirecionar para login após 2 segundos
+                setTimeout(() => {
+                    showPage('login');
+                }, 2000);
+            });
+            
+            // Formulário de login
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('login-email').value.trim();
+                const password = document.getElementById('login-password').value;
+                
+                // Verificar credenciais
+                const user = users.find(u => u.email === email && u.password === password);
+                
+                if (user) {
+                    currentUser = user;
+                    localStorage.setItem('current_user', JSON.stringify(user));
+                    showMessage(loginMessage, `Bem-vindo(a), ${user.name}!`, 'success');
+                    
+                    // Limpar formulário
+                    loginForm.reset();
+                    
+                    // Redirecionar para home após 2 segundos
+                    setTimeout(() => {
+                        showPage('home');
+                    }, 2000);
+                } else {
+                    showMessage(loginMessage, 'E-mail ou senha incorretos!', 'error');
+                }
+            });
+            
+            // Adicionar efeito de digitação no hero
+            const heroTitle = document.querySelector('.hero h1');
+            const originalText = heroTitle.textContent;
+            heroTitle.textContent = '';
+            let i = 0;
+            const typeWriter = () => {
+                if (i < originalText.length) {
+                    heroTitle.textContent += originalText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 150);
+                }
+            };
+            setTimeout(typeWriter, 1000);
+        });
+    </script>
+</body>
+</html>
